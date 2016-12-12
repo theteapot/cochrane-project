@@ -18,21 +18,6 @@ public class ResultsFilter {
 		this.pageContents = new LinkedList<Element>();
 	}
 	
-	/*protected LinkedList<String[]> parseTopicPage(String url) throws Exception {
-		//Given the initial url of a topic page
-		
-		LinkedList<String> topicLinks = getTopicLinks(url);
-		LinkedList<String[]> articleUrls = new LinkedList<String[]>();
-		
-		for (String topicLink : topicLinks) {
-			System.out.println("Descending into topic: " + topicLink);
-			articleUrls.addAll(parseIndexPage(topicLink));
-			System.out.println("Finished topic: " + topicLink);
-		}
-		return articleUrls;
-
-	}*/
-	
 	protected LinkedList<String[]> parsePage(String url) throws Exception {
 		//Takes the url of a topic page, finds the url and doi of each article
 		//in that topic.
@@ -75,6 +60,9 @@ public class ResultsFilter {
 					} catch (SocketTimeoutException socketTimeout) {
 						retry = "yes";
 						System.out.println("Socket timeout for article... retrying");
+					} catch (Exception e) {
+						retry = "yes";
+						System.out.println("Unexpected exception found");
 					}
 			
 				}

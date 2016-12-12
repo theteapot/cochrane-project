@@ -88,10 +88,12 @@ public class MySqlAccessor {
                         // This will load the MySQL driver, each DB has its own driver
                         Class.forName("com.mysql.jdbc.Driver");
                         // Setup the connection with the DB
+                        Scanner passwordScanner = new Scanner(System.in);
+                        String password = passwordScanner.next();
                         connect = DriverManager
                                         .getConnection("jdbc:mysql://localhost/feedback?"
-                                                        + "user=sqluser&password="+SecurePassword.getPassword());
-
+                                                        + "user=sqluser&password="+password);
+                        passwordScanner.close();
                         // Statements allow to issue SQL queries to the database
                         statement = connect.createStatement();
                         // Result set get the result of the SQL query
